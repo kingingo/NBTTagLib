@@ -43,19 +43,6 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-		<!--Bukkit API -->
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.9-R0.1-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<artifactId>bungeecord-api</artifactId>
-			<groupId>net.md-5</groupId>
-			<version>1.9-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
