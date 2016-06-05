@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.wolveringer.lib</groupId>
 	<artifactId>NBTTag</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.2.1</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -17,6 +17,18 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>epicpvp-releases</id>
+			<name>epicpvp-artifactory-releases</name>
+			<url>http://149.202.150.185:8081/artifactory/epicpvp-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>epicpvp-snapshots</id>
+			<name>epicpvp-artifactory-snapshots</name>
+			<url>http://149.202.150.185:8081/artifactory/epicpvp-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<repositories>
 		<repository>
 			<id>epicpvp-all</id>
