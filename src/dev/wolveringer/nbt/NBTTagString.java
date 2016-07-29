@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 
 public class NBTTagString extends NBTBase {
+	private static final String NULL_STRING = String.valueOf('\u0000');
 	private static final Charset UTF_8;
 	
 	static {
@@ -20,8 +21,9 @@ public class NBTTagString extends NBTBase {
 	}
 
 	public NBTTagString(String string) {
+		//throw new IllegalArgumentException("Empty string not allowed"); //Todo remove?
 		if(string == null || string.length() == 0)
-			throw new IllegalArgumentException("Empty string not allowed"); //Todo remove?
+			string = NULL_STRING;
 		final_data = string.getBytes(UTF_8);
 	}
 
@@ -53,6 +55,8 @@ public class NBTTagString extends NBTBase {
 	}
 
 	private String charsetEncoding(byte[] in) {
+		if(in.length == 1 && in[0] == 0)
+			return null;
 		return new String(in, UTF_8);
 	}
 
