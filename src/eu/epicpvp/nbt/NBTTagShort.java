@@ -1,46 +1,46 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class NBTTagDouble extends NBTNumber {
+public class NBTTagShort extends NBTNumber {
 
-	private double data;
+	private short data;
 
-	NBTTagDouble() {
+	public NBTTagShort() {
 	}
 
-	public NBTTagDouble(double d0) {
-		this.data = d0;
+	public NBTTagShort(short short1) {
+		this.data = short1;
 	}
 
 	@Override
 	public long asLong() {
-		return (long) Math.floor(this.data);
+		return this.data;
 	}
 
 	@Override
 	public NBTBase clone() {
-		return new NBTTagDouble(this.data);
+		return new NBTTagShort(this.data);
 	}
 
 	@Override
 	public int asInt() {
-		return MathHelper.floor(this.data);
+		return this.data;
 	}
 
 	@Override
 	public short asShort() {
-		return (short) (MathHelper.floor(this.data) & '\uffff');
+		return this.data;
 	}
 
 	@Override
 	public boolean equals(Object object) {
 		if(super.equals(object)){
-			NBTTagDouble nbttagdouble = (NBTTagDouble) object;
+			NBTTagShort nbttagshort = (NBTTagShort) object;
 
-			return this.data == nbttagdouble.data;
+			return this.data == nbttagshort.data;
 		}else{
 			return false;
 		}
@@ -48,7 +48,7 @@ public class NBTTagDouble extends NBTNumber {
 
 	@Override
 	public byte asByte() {
-		return (byte) (MathHelper.floor(this.data) & 255);
+		return (byte) (this.data & 255);
 	}
 
 	@Override
@@ -58,26 +58,24 @@ public class NBTTagDouble extends NBTNumber {
 
 	@Override
 	public byte getTypeId() {
-		return (byte) 6;
+		return (byte) 2;
 	}
 
 	@Override
 	public float asFloat() {
-		return (float) this.data;
+		return this.data;
 	}
 
 	@Override
 	public int hashCode() {
-		long i = Double.doubleToLongBits(this.data);
-
-		return super.hashCode() ^ (int) (i ^ i >>> 32);
+		return super.hashCode() ^ this.data;
 	}
 
 	@Override
 	void load(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) {
-		nbtreadlimiter.readBytes(64L);
+		nbtreadlimiter.readBytes(16L);
 		try{
-			this.data = datainput.readDouble();
+			this.data = datainput.readShort();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -85,18 +83,18 @@ public class NBTTagDouble extends NBTNumber {
 
 	@Override
 	public String toString() {
-		return "" + this.data + "d";
+		return "" + this.data + "s";
 	}
-	
+
 	@Override
 	String toFormatedString(String in) {
 		return in+toString();
 	}
-
+	
 	@Override
 	void write(DataOutput dataoutput) {
 		try{
-			dataoutput.writeDouble(this.data);
+			dataoutput.writeShort(this.data);
 		}catch (IOException e){
 			e.printStackTrace();
 		}

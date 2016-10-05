@@ -1,46 +1,46 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class NBTTagFloat extends NBTNumber {
+public class NBTTagDouble extends NBTNumber {
 
-	private float data;
+	private double data;
 
-	NBTTagFloat() {
+	NBTTagDouble() {
 	}
 
-	public NBTTagFloat(float f) {
-		this.data = f;
+	public NBTTagDouble(double d0) {
+		this.data = d0;
 	}
 
 	@Override
 	public long asLong() {
-		return (long) this.data;
+		return (long) Math.floor(this.data);
 	}
 
 	@Override
 	public NBTBase clone() {
-		return new NBTTagFloat(this.data);
+		return new NBTTagDouble(this.data);
 	}
 
 	@Override
 	public int asInt() {
-		return MathHelper.d(this.data);
+		return MathHelper.floor(this.data);
 	}
 
 	@Override
 	public short asShort() {
-		return (short) (MathHelper.d(this.data) & '\uffff');
+		return (short) (MathHelper.floor(this.data) & '\uffff');
 	}
 
 	@Override
 	public boolean equals(Object object) {
 		if(super.equals(object)){
-			NBTTagFloat nbttagfloat = (NBTTagFloat) object;
+			NBTTagDouble nbttagdouble = (NBTTagDouble) object;
 
-			return this.data == nbttagfloat.data;
+			return this.data == nbttagdouble.data;
 		}else{
 			return false;
 		}
@@ -48,7 +48,7 @@ public class NBTTagFloat extends NBTNumber {
 
 	@Override
 	public byte asByte() {
-		return (byte) (MathHelper.d(this.data) & 255);
+		return (byte) (MathHelper.floor(this.data) & 255);
 	}
 
 	@Override
@@ -58,24 +58,26 @@ public class NBTTagFloat extends NBTNumber {
 
 	@Override
 	public byte getTypeId() {
-		return (byte) 5;
+		return (byte) 6;
 	}
 
 	@Override
 	public float asFloat() {
-		return this.data;
+		return (float) this.data;
 	}
 
 	@Override
 	public int hashCode() {
-		return super.hashCode() ^ Float.floatToIntBits(this.data);
+		long i = Double.doubleToLongBits(this.data);
+
+		return super.hashCode() ^ (int) (i ^ i >>> 32);
 	}
 
 	@Override
 	void load(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) {
-		nbtreadlimiter.readBytes(32L);
+		nbtreadlimiter.readBytes(64L);
 		try{
-			this.data = datainput.readFloat();
+			this.data = datainput.readDouble();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -83,18 +85,18 @@ public class NBTTagFloat extends NBTNumber {
 
 	@Override
 	public String toString() {
-		return "" + this.data + "f";
+		return "" + this.data + "d";
 	}
-
+	
 	@Override
 	String toFormatedString(String in) {
 		return in+toString();
 	}
-	
+
 	@Override
 	void write(DataOutput dataoutput) {
 		try{
-			dataoutput.writeFloat(this.data);
+			dataoutput.writeDouble(this.data);
 		}catch (IOException e){
 			e.printStackTrace();
 		}

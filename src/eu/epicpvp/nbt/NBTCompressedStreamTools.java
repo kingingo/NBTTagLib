@@ -1,4 +1,4 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

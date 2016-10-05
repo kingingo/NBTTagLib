@@ -1,4 +1,4 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 final class NBTReadLimiterUnlimited extends NBTReadLimiter {
 	NBTReadLimiterUnlimited(long i) {

@@ -1,4 +1,4 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 public abstract class NBTNumber extends NBTBase {
 

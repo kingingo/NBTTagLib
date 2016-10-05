@@ -1,4 +1,4 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 import java.io.FilterInputStream;
 import java.io.IOException;

@@ -1,14 +1,14 @@
-package dev.wolveringer.nbt.bukkit;
+package eu.epicpvp.nbt.bukkit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import dev.wolveringer.nbt.NBTBase;
-import dev.wolveringer.nbt.NBTCompressedStreamTools;
-import dev.wolveringer.nbt.NBTTagCompound;
-import dev.wolveringer.nbt.NBTTagList;
+import eu.epicpvp.nbt.NBTBase;
+import eu.epicpvp.nbt.NBTCompressedStreamTools;
+import eu.epicpvp.nbt.NBTTagCompound;
+import eu.epicpvp.nbt.NBTTagList;
 
 public class NBTTagHelper {
 	public static NBTTagCompound convert(net.minecraft.server.v1_8_R3.NBTTagCompound comp) {

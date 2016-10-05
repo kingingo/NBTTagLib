@@ -1,18 +1,18 @@
-package dev.wolveringer.nbt;
+package eu.epicpvp.nbt;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class NBTTagShort extends NBTNumber {
+public class NBTTagLong extends NBTNumber {
 
-	private short data;
+	private long data;
 
-	public NBTTagShort() {
+	NBTTagLong() {
 	}
 
-	public NBTTagShort(short short1) {
-		this.data = short1;
+	public NBTTagLong(long i) {
+		this.data = i;
 	}
 
 	@Override
@@ -22,25 +22,25 @@ public class NBTTagShort extends NBTNumber {
 
 	@Override
 	public NBTBase clone() {
-		return new NBTTagShort(this.data);
+		return new NBTTagLong(this.data);
 	}
 
 	@Override
 	public int asInt() {
-		return this.data;
+		return (int) (this.data & -1L);
 	}
 
 	@Override
 	public short asShort() {
-		return this.data;
+		return (short) (int) (this.data & 65535L);
 	}
 
 	@Override
 	public boolean equals(Object object) {
 		if(super.equals(object)){
-			NBTTagShort nbttagshort = (NBTTagShort) object;
+			NBTTagLong nbttaglong = (NBTTagLong) object;
 
-			return this.data == nbttagshort.data;
+			return this.data == nbttaglong.data;
 		}else{
 			return false;
 		}
@@ -48,7 +48,7 @@ public class NBTTagShort extends NBTNumber {
 
 	@Override
 	public byte asByte() {
-		return (byte) (this.data & 255);
+		return (byte) (int) (this.data & 255L);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class NBTTagShort extends NBTNumber {
 
 	@Override
 	public byte getTypeId() {
-		return (byte) 2;
+		return (byte) 4;
 	}
 
 	@Override
@@ -68,14 +68,14 @@ public class NBTTagShort extends NBTNumber {
 
 	@Override
 	public int hashCode() {
-		return super.hashCode() ^ this.data;
+		return super.hashCode() ^ (int) (this.data ^ this.data >>> 32);
 	}
 
 	@Override
 	void load(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) {
-		nbtreadlimiter.readBytes(16L);
+		nbtreadlimiter.readBytes(64L);
 		try{
-			this.data = datainput.readShort();
+			this.data = datainput.readLong();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -83,18 +83,17 @@ public class NBTTagShort extends NBTNumber {
 
 	@Override
 	public String toString() {
-		return "" + this.data + "s";
+		return "" + this.data + "L";
 	}
-
 	@Override
 	String toFormatedString(String in) {
 		return in+toString();
 	}
-	
+
 	@Override
 	void write(DataOutput dataoutput) {
 		try{
-			dataoutput.writeShort(this.data);
+			dataoutput.writeLong(this.data);
 		}catch (IOException e){
 			e.printStackTrace();
 		}
